@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% include 'main/components/navbar.html' %}
+
+
+<div class="container">
+    <div class="row">
+        <h1>Trending Questions</h1>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="collection">        
+                {% for question in questions_list %}   <!-- question_list is by default context made by models which is being rendered in the html file-->
+                                                    <!-- it can also be passed as a context in the views.py file as context_name = 'question_list' -->
+                    <a href="#" class="collection-item">
+                        {{ question.content }}
+                    </a>
+                {% endfor %}
+            </div>              
+        </div>
+    </div>
+</div>
+{% endblock %}
