@@ -11,9 +11,9 @@
     <div class="row">
         <div class="col-6">
             <div class="collection">        
-                {% for question in questions_list %}   <!-- question_list is by default context made by models which is being rendered in the html file-->
+                {% for question in question_list %}   <!-- question_list is by default context made by models which is being rendered in the html file-->
                                                     <!-- it can also be passed as a context in the views.py file as context_name = 'question_list' -->
-                    <a href="#" class="collection-item">
+                    <a href="{% url 'question' question.id %}" class="collection-item">
                         {{ question.content }}
                     </a>
                 {% endfor %}

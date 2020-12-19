@@ -3,6 +3,6 @@ from main import models
 # Register your models here.
 
 admin.site.register([
-    models.Questions,
+    models.Question,
     models.Choice,
 ])
