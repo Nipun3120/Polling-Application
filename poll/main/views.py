@@ -1,14 +1,12 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request
 from django.shortcuts import render
 from django.views.generic import (
     ListView,
     DetailView,
     FormView, 
 )
-from django.views.generic.detail import BaseDetailView
-
+from django.views.generic.detail import SingleObjectMixin
 from main import models, forms
-
 # Create your views here.
 
 class Index(ListView):
@@ -16,7 +14,7 @@ class Index(ListView):
     template_name = 'main/index.html'
 
 
-class Question(BaseDetailView, FormView):
+class Question(SingleObjectMixin, FormView):
     model = models.Question
     template_name = 'main/question.html'
     form_class = forms.AnswerForm
@@ -25,9 +23,18 @@ class Question(BaseDetailView, FormView):
 
         # If the form is valid, save the associated model
         form_object = form.save(commit = False)
+        form_object.question = self.get_object()
         form_object.user = self.request.user
         form_object.save()
-
         return HttpResponseRedirect('/')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object = self.get_object)
+        return self.render_to_response(context)
 
 

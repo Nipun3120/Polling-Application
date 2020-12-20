@@ -4,5 +4,4 @@ from main import models
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = models.Answer
-        fields = ['question', 'choice']
-        
+        fields = ['choice']
