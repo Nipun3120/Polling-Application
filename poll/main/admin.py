@@ -5,4 +5,5 @@ from main import models
 admin.site.register([
     models.Question,
     models.Choice,
+    models.Answer,
 ])
