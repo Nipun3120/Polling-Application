@@ -16,20 +16,33 @@
                 <div class="collection">    
                     {% for choice in question.choice_set.all %}
                         <div class="collection-item">
-                            <label>
-                                <input class="with-gap" name="choice" type="radio"  value="{{ choice.id }}"/>
-                                <span>{{ choice.content }}</span>
-                            </label>
+
+                            {% if user_answer %}
+                                {{ choice.content }}
+                                {% if user_answer.choice.id == choice.id %}
+                                    <h5>Selected</h5>
+                                {% endif %}
+
+                            {% else %}
+                                <label>
+                                    <input class="with-gap" name="choice" type="radio"  value="{{ choice.id }}"/>
+                                    <span>{{ choice.content }}</span>
+                                </label>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>              
             </div>
 
+            {% if user_answer %}
+                <p></p>
+            {% else %}
             <div class="row">
                 <button class="btn waves-effect waves-light" type="sbumit" name="action">
                     Submit
                 </button>
             </div>
+            {% endif %}
         </div>
 
         <div class="row">

@@ -19,6 +19,18 @@ class Question(SingleObjectMixin, FormView):
     template_name = 'main/question.html'
     form_class = forms.AnswerForm
 
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        # data['user_answer'] = models.Question.objects.get(
+        #     question = self.get_object(),
+        #     user = self.request.user,
+        # )
+        # return data
+        print('data -> ')
+        print(data)
+
+        
     def form_valid(self, form):
 
         # If the form is valid, save the associated model

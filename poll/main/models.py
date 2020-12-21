@@ -22,7 +22,7 @@ class Answer(models.Model):
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
     choice = models.ForeignKey('Choice', on_delete=models.CASCADE)
     
-    name = models.ForeignKey(User, on_delete=models.CASCADE, default=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=True)
 
 
 
