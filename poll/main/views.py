@@ -6,6 +6,8 @@ from django.views.generic import (
     FormView, 
 )
 from django.views.generic.detail import SingleObjectMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
 from main import models, forms
 # Create your views here.
 
@@ -14,10 +16,11 @@ class Index(ListView):
     template_name = 'main/index.html'
 
 
-class Question(SingleObjectMixin, FormView):
+class Question(PermissionRequiredMixin, SingleObjectMixin, FormView):
     model = models.Question
     template_name = 'main/question.html'
     form_class = forms.AnswerForm
+
 
 
     def get_context_data(self, **kwargs):
